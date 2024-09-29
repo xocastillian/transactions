@@ -9,11 +9,18 @@ export class TransactionsService {
   async createTransaction(data: Prisma.TransactionCreateInput) {
     return this.prisma.transaction.create({
       data,
+      include: {
+        category: true,
+      },
     })
   }
 
   async getAllTransactions() {
-    return this.prisma.transaction.findMany()
+    return this.prisma.transaction.findMany({
+      include: {
+        category: true,
+      },
+    })
   }
 
   async removeTransaction(id: number) {
